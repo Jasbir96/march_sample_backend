@@ -18,4 +18,40 @@
 			* `SECRET`: all the key value pairs
 * **ci/cd pipeline** -> these are set of steps that runner need to do after every update to deploy the most recent version of your appliceation
 *  **Github actions**
-   *  add an action -> yml file 
+   *  add the action -> go to actions tab -> choose nodejs for ci/cd
+  ```yml
+  name: Node.js CI/CD
+	on:
+	push:
+		branches: [ "main" ]
+
+	jobs:
+	build:
+		runs-on: self-hosted
+		strategy:
+		matrix:
+			node-version: [18.x]
+			# See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+		steps:
+		- uses: actions/checkout@v3
+		- name: Use Node.js ${{ matrix.node-version }}
+		uses: actions/setup-node@v3
+		with:
+			node-version: ${{ matrix.node-version }}
+			cache: 'npm'
+		- run: npm ci
+		- run: |
+			touch .env
+			echo "${{ secrets.PROD_ENV_FILE }}" > .env
+  ```
+
+* **upating our machine  with required dependcies**
+	* `sudo apt update`
+	* install nodejs version 18
+	``` curl
+	curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+	sudo apt install nodejs 
+	```
+	* 
+
