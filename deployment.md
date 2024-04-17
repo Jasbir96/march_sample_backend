@@ -53,5 +53,27 @@
 	curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 	sudo apt install nodejs 
 	```
-	* 
+	* install pm2 gobally
+  		```curl
+  		sudo npm install -g pm2
+  		pm2 start app.js
+  		pm2 restart app
+  		```
+	* add pm2 command to yml file as well
+  * configure nginx
+	* install it , don't need to run it 
+	```
+	sudo apt-get install -y nginx
+	```
+	* open this file
+```
+sudo nano /etc/nginx/sites-available/default
+```
+* after doing the changes do ->  
+* `sudo nginx -t`
+* sudo systemctl restart nginx
+
+
+ 
+	 
 
